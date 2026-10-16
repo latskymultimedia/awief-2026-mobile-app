@@ -45,26 +45,18 @@
             position: relative;
         }
 
-        /* Header */
+        /* Header with full width logo */
         header {
-            padding: 20px;
-            background: linear-gradient(180deg, #fdf2f4 0%, var(--bg-color) 100%);
+            background-color: var(--bg-color);
             border-bottom: 1px solid var(--card-border);
             text-align: center;
+            overflow: hidden;
         }
 
         .logo-container img {
-            max-width: 180px;
+            width: 100%;
             height: auto;
-            margin-bottom: 10px;
-        }
-
-        .tagline {
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--accent-maroon);
-            font-weight: 700;
+            display: block;
         }
 
         /* Main Content Scroll Area */
@@ -248,12 +240,11 @@
 <body>
 
     <div class="app-container">
-        <!-- Header with AWIEF Branding and AWIEFimage1.jpg -->
+        <!-- Header with full-width AWIEFimage1.jpg -->
         <header>
             <div class="logo-container">
                 <img src="AWIEFimage1.jpg" alt="AWIEF 2026 Logo">
             </div>
-            <div class="tagline">10–11 Nov 2026 • CTICC, Cape Town</div>
         </header>
 
         <!-- Scrollable Body Content -->
