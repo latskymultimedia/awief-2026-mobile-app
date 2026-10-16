@@ -8,14 +8,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0b0b0e;
-            --card-bg: #16161c;
-            --card-border: #272732;
-            --text-primary: #ffffff;
-            --text-secondary: #9ca3af;
-            --accent-gold: #f59e0b;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --card-border: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+            --accent-gold: #d97706;
             --accent-maroon: #7a1c32;
-            --brand-gold-text: #fbbf24;
+            --brand-gold-text: #b45309;
         }
 
         * {
@@ -26,7 +26,7 @@
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: #e2e8f0;
             color: var(--text-primary);
             display: flex;
             justify-content: center;
@@ -41,14 +41,14 @@
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 0 40px rgba(0,0,0,0.8);
+            box-shadow: 0 0 40px rgba(0,0,0,0.15);
             position: relative;
         }
 
         /* Header */
         header {
             padding: 20px;
-            background: linear-gradient(180deg, #1a080d 0%, var(--bg-color) 100%);
+            background: linear-gradient(180deg, #fdf2f4 0%, var(--bg-color) 100%);
             border-bottom: 1px solid var(--card-border);
             text-align: center;
         }
@@ -63,8 +63,8 @@
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            color: var(--brand-gold-text);
-            font-weight: 600;
+            color: var(--accent-maroon);
+            font-weight: 700;
         }
 
         /* Main Content Scroll Area */
@@ -76,8 +76,8 @@
         }
 
         .section-title {
-            font-size: 1rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 700;
             margin-bottom: 15px;
             color: var(--text-secondary);
             text-transform: uppercase;
@@ -86,18 +86,19 @@
 
         /* Hero / Live Card */
         .hero-card {
-            background: linear-gradient(135deg, #2a0c14 0%, #16161c 100%);
+            background: linear-gradient(135deg, #7a1c32 0%, #521221 100%);
             border: 1px solid var(--accent-maroon);
             border-radius: 16px;
             padding: 20px;
             margin-bottom: 25px;
             position: relative;
             overflow: hidden;
+            color: #ffffff;
         }
 
         .hero-badge {
             display: inline-block;
-            background-color: var(--accent-maroon);
+            background-color: var(--brand-gold-text);
             color: #fff;
             font-size: 0.65rem;
             font-weight: 700;
@@ -111,11 +112,12 @@
             font-size: 1.25rem;
             font-weight: 700;
             margin-bottom: 6px;
+            color: #ffffff;
         }
 
         .hero-card p {
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            color: #f1f5f9;
             margin-bottom: 15px;
         }
 
@@ -123,8 +125,8 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            background-color: var(--brand-gold-text);
-            color: #000;
+            background-color: #fbbf24;
+            color: #0f172a;
             font-weight: 600;
             font-size: 0.85rem;
             padding: 10px 18px;
@@ -137,7 +139,7 @@
             opacity: 0.9;
         }
 
-        /* Grid Menu (Token2049 Style) */
+        /* Grid Menu Style */
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -156,11 +158,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             transition: all 0.2s ease;
         }
 
         .menu-item:hover {
-            border-color: var(--brand-gold-text);
+            border-color: var(--accent-maroon);
             transform: translateY(-2px);
         }
 
@@ -171,10 +174,10 @@
 
         .menu-text {
             font-size: 0.75rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
-        /* List Items (Schedule / Updates) */
+        /* List Items */
         .list-card {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
@@ -184,12 +187,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
 
         .list-info h4 {
             font-size: 0.9rem;
             font-weight: 600;
             margin-bottom: 4px;
+            color: var(--text-primary);
         }
 
         .list-info p {
@@ -199,9 +204,9 @@
 
         .time-badge {
             font-size: 0.75rem;
-            font-weight: 600;
-            color: var(--brand-gold-text);
-            background: rgba(251, 191, 36, 0.1);
+            font-weight: 700;
+            color: var(--accent-maroon);
+            background: #fdf2f4;
             padding: 4px 8px;
             border-radius: 6px;
         }
@@ -212,7 +217,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background-color: rgba(11, 11, 14, 0.95);
+            background-color: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-top: 1px solid var(--card-border);
             display: flex;
@@ -227,11 +232,11 @@
             flex-direction: column;
             align-items: center;
             font-size: 0.65rem;
-            font-weight: 500;
+            font-weight: 600;
         }
 
         .nav-item.active, .nav-item:hover {
-            color: var(--brand-gold-text);
+            color: var(--accent-maroon);
         }
 
         .nav-icon {
@@ -243,11 +248,10 @@
 <body>
 
     <div class="app-container">
-        <!-- Header with AWIEF Branding -->
+        <!-- Header with AWIEF Branding and AWIEFimage1.jpg -->
         <header>
             <div class="logo-container">
-                <!-- Replace 'logo.png' with your actual hosted logo file name -->
-                <img src="logo.png" alt="AWIEF 2026 Logo">
+                <img src="AWIEFimage1.jpg" alt="AWIEF 2026 Logo">
             </div>
             <div class="tagline">10–11 Nov 2026 • CTICC, Cape Town</div>
         </header>
@@ -259,11 +263,11 @@
             <div class="hero-card">
                 <span class="hero-badge">Happening Now</span>
                 <h2>Opening Plenary & Keynote</h2>
-                <p>Sygnia Asset Management CEO Magda Wierzycka live on the Main Stage[cite: 5].</p>
+                <p>Sygnia Asset Management CEO Magda Wierzycka live on the Main Stage.</p>
                 <a href="#schedule" class="btn-primary">View Full Programme</a>
             </div>
 
-            <!-- Quick Access Menu Grid (Token2049 Style) -->
+            <!-- Quick Access Menu Grid -->
             <div class="section-title">Quick Navigation</div>
             <div class="menu-grid">
                 <a href="#schedule" class="menu-item">
@@ -300,7 +304,7 @@
                     <h4>Magda Wierzycka Keynote</h4>
                     <p>Main Stage • Opening Address</p>
                 </div>
-                <span class="time-badge">09:00</span>[cite: 5]
+                <span class="time-badge">09:00</span>
             </div>
 
             <div class="list-card">
@@ -308,7 +312,7 @@
                     <h4>Peace Dividends Plenary</h4>
                     <p>Open Society Foundations Partnership</p>
                 </div>
-                <span class="time-badge">10:00</span>[cite: 5]
+                <span class="time-badge">10:00</span>
             </div>
 
             <div class="list-card">
@@ -316,7 +320,7 @@
                     <h4>Blue Economy Panel</h4>
                     <p>Owning Assets in Aquaculture & Tourism</p>
                 </div>
-                <span class="time-badge">15:00</span>[cite: 10]
+                <span class="time-badge">15:00</span>
             </div>
 
         </div>
