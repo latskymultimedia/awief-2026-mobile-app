@@ -59,36 +59,33 @@
             display: block;
         }
 
-        /* Top Horizontal Quick Action Bar */
+        /* Top Quick Action Bar - Fitted to Screen Width */
         .top-action-bar {
             display: flex;
-            gap: 10px;
-            overflow-x: auto;
+            flex-wrap: wrap;
+            gap: 8px;
             padding: 15px 20px;
             background-color: var(--bg-color);
-            scrollbar-width: none;
-        }
-
-        .top-action-bar::-webkit-scrollbar {
-            display: none;
+            justify-content: space-between;
         }
 
         .top-btn {
             background-color: var(--card-bg);
             border: 1px solid var(--card-border);
             border-radius: 30px;
-            padding: 8px 16px;
-            font-size: 0.75rem;
+            padding: 8px 12px;
+            font-size: 0.72rem;
             font-weight: 600;
             color: var(--text-primary);
             display: flex;
             align-items: center;
-            gap: 6px;
-            white-space: nowrap;
-            cursor: pointer;
+            justify-content: center;
+            gap: 4px;
+            flex: 1 1 calc(50% - 6px); /* 2 buttons per row, perfectly balanced */
             box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             text-decoration: none;
             transition: all 0.2s;
+            white-space: nowrap;
         }
 
         .top-btn.highlight {
@@ -102,6 +99,15 @@
             flex: 1;
             padding: 0 20px 90px 20px;
             overflow-y: auto;
+        }
+
+        .section-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* Featured Speaker Hero Card with Rounded Corners */
@@ -139,15 +145,6 @@
             width: 16px;
             border-radius: 4px;
             background-color: var(--accent-maroon);
-        }
-
-        .section-title {
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         /* Grid Menu Style */
@@ -266,7 +263,7 @@
             </div>
         </header>
 
-        <!-- Top Horizontal Quick Action Bar -->
+        <!-- Top Quick Action Bar - Fitted to Width -->
         <div class="top-action-bar">
             <a href="#schedule" class="top-btn">📅 Schedule</a>
             <a href="#workshops" class="top-btn">🛠️ Workshops</a>
@@ -277,6 +274,9 @@
         <!-- Scrollable Body Content -->
         <div class="content">
             
+            <!-- Suggested Section Title -->
+            <div class="section-title">Suggested</div>
+
             <!-- Featured Speaker Hero Card (AWIEFriaanmanser.jpg) -->
             <div class="hero-card">
                 <img src="AWIEFriaanmanser.jpg" alt="Riaan Manser Keynote">
