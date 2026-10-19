@@ -44,36 +44,37 @@
             position: relative;
         }
 
-        /* Top Header (Logo + Meta) */
+        /* Top Header Matching Reference Layout */
         header {
             background-color: var(--card-bg);
             border-bottom: 1px solid var(--card-border);
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 15px 20px 12px 20px;
+            text-align: center;
         }
 
         .header-logo img {
-            max-width: 140px;
+            width: 100%;
+            max-width: 280px;
             height: auto;
             display: block;
+            margin: 0 auto 8px auto;
         }
 
         .header-meta {
-            text-align: right;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
             font-size: 0.75rem;
             color: var(--text-secondary);
-            line-height: 1.4;
+            font-weight: 500;
+            border-top: 1px solid #f1f5f9;
+            padding-top: 8px;
         }
 
         .header-meta .location {
-            font-weight: 600;
             color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 4px;
+            font-weight: 600;
         }
 
         /* Top Horizontal Quick Action Bar */
@@ -276,14 +277,14 @@
 <body>
 
     <div class="app-container">
-        <!-- Top Header Matching Reference -->
+        <!-- Top Header Matching Reference Layout -->
         <header>
             <div class="header-logo">
                 <img src="AWIEFimage1.jpg" alt="AWIEF 2026 Logo">
             </div>
             <div class="header-meta">
-                <div class="location">📍 Cape Town</div>
-                <div>🗓️ 10–11 Nov 2026</div>
+                <span class="location">📍 Cape Town</span>
+                <span>🗓️ 10–11 Nov 2026</span>
             </div>
         </header>
 
@@ -298,9 +299,9 @@
         <!-- Scrollable Body Content -->
         <div class="content">
             
-            <!-- Featured Speaker Hero Card (AWIEFriaanmanser.png) -->
+            <!-- Featured Speaker Hero Card (AWIEFriaanmanser.jpg) -->
             <div class="hero-card">
-                <img src="AWIEFriaanmanser.png" alt="Riaan Manser Keynote">
+                <img src="AWIEFriaanmanser.jpg" alt="Riaan Manser Keynote">
             </div>
 
             <!-- Pagination Dots -->
@@ -372,31 +373,6 @@
 
         <!-- Fixed Bottom App Navigation -->
         <nav class="bottom-nav">
-            <a href="#" class="nav-item active">
-                <span class="nav-icon">🏠</span>
-                Home
-            </a>
-            <a href="#schedule" class="nav-item">
-                <span class="nav-icon">📅</span>
-                Programme
-            </a>
-            <a href="#speakers" class="nav-item">
-                <span class="nav-icon">🎙️</span>
-                Speakers
-            </a>
-            <a href="#map" class="nav-item">
-                <span class="nav-icon">🗺️</span>
-                Venue
-            </a>
-            <a href="#info" class="nav-item">
-                <span class="nav-icon">ℹ️</span>
-                Info
-            </a>
-        </nav>
-    </div>
-
-</body>
-</html>
             <a href="#" class="nav-item active">
                 <span class="nav-icon">🏠</span>
                 Home
