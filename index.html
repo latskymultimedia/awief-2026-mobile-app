@@ -44,37 +44,19 @@
             position: relative;
         }
 
-        /* Top Header Matching Reference Layout */
+        /* Top Header - Edge to Edge */
         header {
             background-color: var(--card-bg);
             border-bottom: 1px solid var(--card-border);
-            padding: 15px 20px 12px 20px;
+            padding: 0;
             text-align: center;
+            overflow: hidden;
         }
 
         .header-logo img {
             width: 100%;
-            max-width: 280px;
             height: auto;
             display: block;
-            margin: 0 auto 8px auto;
-        }
-
-        .header-meta {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            font-weight: 500;
-            border-top: 1px solid #f1f5f9;
-            padding-top: 8px;
-        }
-
-        .header-meta .location {
-            color: var(--text-primary);
-            font-weight: 600;
         }
 
         /* Top Horizontal Quick Action Bar */
@@ -277,14 +259,10 @@
 <body>
 
     <div class="app-container">
-        <!-- Top Header Matching Reference Layout -->
+        <!-- Top Header - Full Width Logo -->
         <header>
             <div class="header-logo">
                 <img src="AWIEFimage1.jpg" alt="AWIEF 2026 Logo">
-            </div>
-            <div class="header-meta">
-                <span class="location">📍 Cape Town</span>
-                <span>🗓️ 10–11 Nov 2026</span>
             </div>
         </header>
 
