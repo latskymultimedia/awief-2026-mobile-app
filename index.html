@@ -1,378 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AWIEF 2026 Conference App</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --bg-color: #f8fafc;
-            --card-bg: #ffffff;
-            --card-border: #e2e8f0;
-            --text-primary: #0f172a;
-            --text-secondary: #64748b;
-            --accent-maroon: #7a1c32;
-            --brand-gold-text: #b45309;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: #e2e8f0;
-            color: var(--text-primary);
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
-        }
-
-        /* Mobile App Container */
-        .app-container {
-            width: 100%;
-            max-width: 480px;
-            background-color: var(--bg-color);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            box-shadow: 0 0 40px rgba(0,0,0,0.15);
-            position: relative;
-        }
-
-        /* Top Header - Edge to Edge */
-        header {
-            background-color: var(--card-bg);
-            border-bottom: 1px solid var(--card-border);
-            padding: 0;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .header-logo img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Top Quick Action Bar - Fitted to Screen Width */
-        .top-action-bar {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            padding: 15px 20px;
-            background-color: var(--bg-color);
-            justify-content: space-between;
-        }
-
-        .top-btn {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 30px;
-            padding: 8px 12px;
-            font-size: 0.72rem;
-            font-weight: 600;
-            color: var(--text-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            flex: 1 1 calc(50% - 6px); /* 2 buttons per row, perfectly balanced */
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            text-decoration: none;
-            transition: all 0.2s;
-            white-space: nowrap;
-        }
-
-        .top-btn.highlight {
-            background-color: var(--accent-maroon);
-            color: #ffffff;
-            border-color: var(--accent-maroon);
-        }
-
-        /* Main Content Scroll Area */
-        .content {
-            flex: 1;
-            padding: 0 20px 90px 20px;
-            overflow-y: auto;
-        }
-
-        .section-title {
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Featured Speaker Hero Card with Rounded Corners */
-        .hero-card {
-            border-radius: 24px;
-            overflow: hidden;
-            position: relative;
-            margin-bottom: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-            background-color: #f59e0b;
-        }
-
-        .hero-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Pagination Dots */
-        .pagination-dots {
-            display: flex;
-            justify-content: center;
-            gap: 6px;
-            margin-bottom: 25px;
-        }
-
-        .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #cbd5e1;
-        }
-
-        .dot.active {
-            width: 16px;
-            border-radius: 4px;
-            background-color: var(--accent-maroon);
-        }
-
-        /* Grid Menu Style */
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-
-        .menu-item {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 18px 10px;
-            text-align: center;
-            text-decoration: none;
-            color: var(--text-primary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-            transition: all 0.2s ease;
-        }
-
-        .menu-item:hover {
-            border-color: var(--accent-maroon);
-            transform: translateY(-2px);
-        }
-
-        .menu-icon {
-            font-size: 1.5rem;
-            margin-bottom: 8px;
-        }
-
-        .menu-text {
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        /* List Items */
-        .list-card {
-            background-color: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 16px;
-            padding: 16px;
-            margin-bottom: 12px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-        }
-
-        .list-info h4 {
-            font-size: 0.9rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-            color: var(--text-primary);
-        }
-
-        .list-info p {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        .time-badge {
-            font-size: 0.75rem;
-            font-weight: 700;
-            color: var(--accent-maroon);
-            background: #fdf2f4;
-            padding: 6px 10px;
-            border-radius: 8px;
-        }
-
-        /* Bottom Navigation Bar */
-        nav.bottom-nav {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-top: 1px solid var(--card-border);
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-        }
-
-        .nav-item {
-            text-decoration: none;
-            color: var(--text-secondary);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 0.65rem;
-            font-weight: 600;
-        }
-
-        .nav-item.active, .nav-item:hover {
-            color: var(--accent-maroon);
-        }
-
-        .nav-icon {
-            font-size: 1.2rem;
-            margin-bottom: 3px;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AWIEF 2026 Conference App</title>
+<meta name="theme-color" content="#7a1c32">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+<!-- Analytics (optional): add your Plausible/Umami script tag here -->
+<style>
+:root{--bg:#faf7f5;--card:#fff;--line:#eadfe0;--ink:#2a1220;--mute:#7b6670;--maroon:#7a1c32;--gold:#f2a93b;--tint:#fbeff1}
+*{box-sizing:border-box;margin:0;padding:0;font-family:Montserrat,system-ui,sans-serif}
+body{background:#e9e1e3;color:var(--ink)}
+.app{max-width:480px;margin:auto;min-height:100dvh;background:var(--bg);padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+header img{width:100%;display:block;background:#fff}
+.chips{display:flex;gap:8px;padding:14px 20px;overflow-x:auto}
+.chip{flex:none;border:1px solid var(--line);background:var(--card);border-radius:30px;padding:10px 16px;font-size:.85rem;font-weight:600;color:var(--ink)}
+.chip.on{background:var(--maroon);border-color:var(--maroon);color:#fff}
+main{padding:0 20px}
+h2{font-size:1.05rem;font-weight:800;margin:18px 0 12px;color:var(--maroon)}
+.view{display:none}.view.on{display:block}
+.car{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;scrollbar-width:none;margin:0 -20px;padding:0 20px}
+.car::-webkit-scrollbar{display:none}
+.slide{flex:none;width:100%;scroll-snap-align:center;border-radius:24px;overflow:hidden;background:var(--gold);min-height:190px}
+.slide img{width:100%;display:block}
+.sl{padding:22px;display:flex;flex-direction:column;justify-content:flex-end;min-height:190px;color:var(--maroon)}
+.sl b{font-size:1.5rem;font-weight:800;line-height:1.1}.sl span{font-size:.9rem;font-weight:600;margin-top:8px}
+.sl.m{background:var(--maroon);color:#fff}
+.dots{display:flex;justify-content:center;gap:6px;margin:12px 0 4px}
+.dots i{width:6px;height:6px;border-radius:9px;background:#d9c9cc;transition:.2s}.dots i.on{width:18px;background:var(--maroon)}
+.nn{background:var(--maroon);color:#fff;border-radius:20px;padding:18px}
+.nn small{opacity:.8;font-size:.8rem;font-weight:600}.nn b{display:block;font-size:1.05rem;margin:4px 0 2px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 8px;font-size:.8rem;font-weight:700;display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--ink)}
+svg.i{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tile svg{color:var(--maroon)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px;display:flex;gap:12px}
+.card.brk{background:transparent;border-style:dashed;color:var(--mute)}
+.tm{flex:none;width:58px;font-size:.8rem;font-weight:800;color:var(--maroon)}.tm small{display:block;color:var(--mute);font-weight:600}
+.bd{flex:1;min-width:0}.bd h4{font-size:.92rem;line-height:1.3}.bd p{font-size:.78rem;color:var(--mute);margin-top:4px;line-height:1.4}
+.tag{display:inline-block;font-size:.7rem;font-weight:700;background:var(--tint);color:var(--maroon);border-radius:6px;padding:2px 7px;margin-top:6px}
+.star{flex:none;background:none;border:0;color:#cdbcc0;width:36px;height:36px}.star.on{color:var(--gold)}.star.on svg{fill:currentColor}
+.btn{display:block;width:100%;border:0;border-radius:14px;padding:14px;font-weight:700;font-size:.9rem;background:var(--maroon);color:#fff;margin:8px 0}
+.btn.alt{background:var(--card);color:var(--maroon);border:1px solid var(--maroon)}
+.note{background:#fff6e0;border:1px solid #f0d58f;border-radius:14px;padding:12px;font-size:.8rem;margin:10px 0;line-height:1.45;display:none}
+.wall{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.wall img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:12px}
+.av{flex:none;width:42px;height:42px;border-radius:50%;background:var(--maroon);color:#fff;display:grid;place-items:center;font-weight:800;font-size:.85rem}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;background:rgba(255,255,255,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:8px 0 calc(8px + env(safe-area-inset-bottom));z-index:5}
+nav button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:.72rem;font-weight:600;color:var(--mute);min-width:56px;min-height:44px}
+nav button.on{color:var(--maroon)}
+footer{text-align:center;font-size:.75rem;color:var(--mute);margin:26px 0 8px}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+</style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v10H3z"/></symbol>
+<symbol id="cal" viewBox="0 0 24 24"><path d="M4 5h16v16H4zM4 10h16M8 3v4M16 3v4"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
+<symbol id="cam" viewBox="0 0 24 24"><path d="M3 7h4l2-3h6l2 3h4v13H3z"/><circle cx="12" cy="13" r="4"/></symbol>
+<symbol id="info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></symbol>
+<symbol id="star" viewBox="0 0 24 24"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></symbol>
+<symbol id="pin" viewBox="0 0 24 24"><path d="M12 21s7-6 7-11a7 7 0 10-14 0c0 5 7 11 7 11z"/><circle cx="12" cy="10" r="2"/></symbol>
+<symbol id="cloud" viewBox="0 0 24 24"><path d="M7 18a4 4 0 010-8 5 5 0 019.6 1A3.5 3.5 0 0117 18z"/></symbol>
+</defs></svg>
+<div class="app">
+<header><img src="AWIEFimage1.jpg" alt="AWIEF 2026, 12th annual conference, Cape Town, 10–11 November 2026"></header>
+<div class="chips">
+<button class="chip" data-go="prog">Schedule</button>
+<button class="chip" data-go="prog" data-f="work">Workshops</button>
+<button class="chip" data-go="spk">Speakers</button>
+<button class="chip" data-go="info" data-scroll="wx">Weather</button>
+</div>
+<main>
+<section class="view on" id="v-home">
+ <h2>Suggested</h2>
+ <div class="car" id="car">
+  <div class="slide"><img src="hero-riaan.webp" alt="Riaan Manser, Ignite Talk, Wed 11 Nov 13:25, Main Stage"></div>
+  <div class="slide"><div class="sl m"><b>Beyond Access: Owning Capital, Markets &amp; Power</b><span>The 2026 theme. 10–11 Nov, Cape Town</span></div></div>
+  <div class="slide"><div class="sl"><b>AWIEF Pitch n Grow</b><span>10 finalists, 3 tracks. Wed 11 Nov, 11:10, Main Stage</span></div></div>
+  <div class="slide"><div class="sl"><b>AWIEF–Nedbank Women Enterprise Growth &amp; Export</b><span>Programme launch. Tue 10 Nov, 15:00, Main Stage</span></div></div>
+  <div class="slide"><div class="sl m"><b>Awards Ceremony &amp; Gala Dinner</b><span>Wed 11 Nov, 19:30</span></div></div>
+ </div>
+ <div class="dots" id="dots"></div>
+ <h2>Now &amp; next</h2>
+ <div class="nn" id="nn"></div>
+ <div id="ann"></div>
+ <h2>Quick navigation</h2>
+ <div class="grid">
+  <button class="tile" data-go="prog"><svg class="i"><use href="#cal"/></svg>Schedule</button>
+  <button class="tile" data-go="spk"><svg class="i"><use href="#users"/></svg>Speakers</button>
+  <button class="tile" data-go="mom"><svg class="i"><use href="#cam"/></svg>Moments</button>
+  <button class="tile" data-go="prog" data-f="mine"><svg class="i"><use href="#star"/></svg>My agenda</button>
+  <button class="tile" data-go="info" data-scroll="venue"><svg class="i"><use href="#pin"/></svg>Venue</button>
+  <button class="tile" data-go="info" data-scroll="wx"><svg class="i"><use href="#cloud"/></svg>Weather</button>
+ </div>
+</section>
 
-    <div class="app-container">
-        <!-- Top Header - Full Width Logo -->
-        <header>
-            <div class="header-logo">
-                <img src="AWIEFimage1.jpg" alt="AWIEF 2026 Logo">
-            </div>
-        </header>
+<section class="view" id="v-prog">
+ <h2>Programme</h2>
+ <div class="chips" style="padding:0 0 10px" id="days"></div>
+ <div class="chips" style="padding:0 0 12px" id="flt"></div>
+ <div id="list"></div>
+ <button class="btn alt" id="ics">Add my agenda to calendar</button>
+ <p style="font-size:.75rem;color:var(--mute)">All times are Central Africa Time (CAT). Draft programme, subject to change.</p>
+</section>
 
-        <!-- Top Quick Action Bar - Fitted to Width -->
-        <div class="top-action-bar">
-            <a href="#schedule" class="top-btn">📅 Schedule</a>
-            <a href="#workshops" class="top-btn">🛠️ Workshops</a>
-            <a href="#speakers" class="top-btn highlight">👥 Speakers</a>
-            <a href="#weather" class="top-btn">☁️ Weather Forecast</a>
-        </div>
+<section class="view" id="v-spk"><h2>Speakers</h2><div id="spkl"></div></section>
 
-        <!-- Scrollable Body Content -->
-        <div class="content">
-            
-            <!-- Suggested Section Title -->
-            <div class="section-title">Suggested</div>
+<section class="view" id="v-mom">
+ <h2>Moments</h2>
+ <p style="font-size:.85rem;line-height:1.5">Share your best photo from the conference. Photos appear on the wall once approved by the AWIEF team.</p>
+ <label style="display:flex;gap:8px;font-size:.78rem;margin:12px 0;line-height:1.4"><input type="checkbox" id="consent"> I agree my photo may be shown on the AWIEF app and social channels, and that I have the permission of the people in it.</label>
+ <input type="file" id="file" accept="image/*" capture="environment" hidden>
+ <button class="btn" id="up">Take or choose a photo</button>
+ <p id="upm" style="font-size:.8rem;color:var(--mute)"></p>
+ <div class="wall" id="wall"></div>
+</section>
 
-            <!-- Featured Speaker Hero Card (AWIEFriaanmanser.jpg) -->
-            <div class="hero-card">
-                <img src="AWIEFriaanmanser.jpg" alt="Riaan Manser Keynote">
-            </div>
+<section class="view" id="v-info">
+ <h2>Notifications</h2>
+ <div class="note" id="inapp">You're in an in-app browser. Open this page in Safari or Chrome to install the app and get notifications.</div>
+ <div class="note" id="ios">On iPhone: tap Share, then Add to Home Screen. Open the app from your home screen, then turn on notifications here.</div>
+ <button class="btn" id="pushb">Turn on notifications</button>
+ <h2 id="venue">Venue</h2>
+ <div class="card"><div class="bd"><h4>Cape Town International Convention Centre (CTICC)</h4><p>Registration and exhibition: Foyer. Main Stage: plenary sessions. Expo Floor: workshops, masterclasses and B2B meetings.</p></div></div>
+ <img id="map" src="map.jpg" alt="CTICC floor plan" style="width:100%;border-radius:14px;display:none" onload="this.style.display='block'">
+ <h2 id="wx">Weather forecast</h2>
+ <div class="card"><div class="bd" id="wxb"><p>Loading…</p></div></div>
+</section>
+<footer>App by Latsky Multimedia</footer>
+</main>
+<nav>
+<button data-go="home" class="on"><svg class="i"><use href="#home"/></svg>Home</button>
+<button data-go="prog"><svg class="i"><use href="#cal"/></svg>Programme</button>
+<button data-go="spk"><svg class="i"><use href="#users"/></svg>Speakers</button>
+<button data-go="mom"><svg class="i"><use href="#cam"/></svg>Moments</button>
+<button data-go="info"><svg class="i"><use href="#info"/></svg>Info</button>
+</nav>
+</div>
+<script>
+/* ===== CONFIG: fill these in (see README) ===== */
+const CFG={onesignal:'',sbUrl:'',sbKey:''};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const DATES={1:'2026-11-10',2:'2026-11-11'};
+let S=[],day=1,flt='all',mine=[];
+try{mine=JSON.parse(localStorage.mine||'[]')}catch(e){}
+const save=()=>{try{localStorage.mine=JSON.stringify(mine)}catch(e){}};
+const cat=()=>new Intl.DateTimeFormat('sv-SE',{timeZone:'Africa/Johannesburg',dateStyle:'short',timeStyle:'short'}).format(new Date());
+const names=p=>(p||'').split(';').filter(Boolean).map(x=>x.split('|')[0]).join(', ');
 
-            <!-- Pagination Dots -->
-            <div class="pagination-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
+/* navigation */
+function go(v,f,sc){
+ $$('.view').forEach(e=>e.classList.toggle('on',e.id==='v-'+v));
+ $$('nav button').forEach(b=>b.classList.toggle('on',b.dataset.go===v));
+ $$('.chips:first-of-type .chip').forEach(c=>c.classList.remove('on'));
+ if(v==='prog'){flt=f||'all';drawFlt();draw()}
+ if(v==='mom')wall();
+ scrollTo(0,0);if(sc)setTimeout(()=>document.getElementById(sc).scrollIntoView(),50);
+}
+document.addEventListener('click',e=>{const b=e.target.closest('[data-go]');if(b)go(b.dataset.go,b.dataset.f,b.dataset.scroll)});
 
-            <!-- Quick Access Menu Grid -->
-            <div class="section-title">Quick Navigation</div>
-            <div class="menu-grid">
-                <a href="#schedule" class="menu-item">
-                    <span class="menu-icon">📅</span>
-                    <span class="menu-text">Schedule</span>
-                </a>
-                <a href="#speakers" class="menu-item">
-                    <span class="menu-icon">🎙️</span>
-                    <span class="menu-text">Speakers</span>
-                </a>
-                <a href="#map" class="menu-item">
-                    <span class="menu-icon">🗺️</span>
-                    <span class="menu-text">CTICC Map</span>
-                </a>
-                <a href="#tickets" class="menu-item">
-                    <span class="menu-icon">🎟️</span>
-                    <span class="menu-text">Tickets</span>
-                </a>
-                <a href="#ai-panel" class="menu-item">
-                    <span class="menu-icon">🤖</span>
-                    <span class="menu-text">AI Panel</span>
-                </a>
-                <a href="#networking" class="menu-item">
-                    <span class="menu-icon">🤝</span>
-                    <span class="menu-text">B2B Match</span>
-                </a>
-            </div>
+/* schedule */
+const FL=[['all','All'],['Main Stage','Main Stage'],['Expo Floor','Expo Floor'],['work','Workshops'],['mine','My agenda']];
+function drawFlt(){
+ $('#days').innerHTML=[1,2].map(d=>`<button class="chip ${d===day?'on':''}" data-d="${d}">Day ${d}, ${d===1?'Tue 10':'Wed 11'} Nov</button>`).join('');
+ $('#flt').innerHTML=FL.map(([k,l])=>`<button class="chip ${k===flt?'on':''}" data-k="${k}">${l}</button>`).join('');
+}
+$('#days').onclick=e=>{const d=e.target.dataset.d;if(d){day=+d;drawFlt();draw()}};
+$('#flt').onclick=e=>{const k=e.target.dataset.k;if(k){flt=k;drawFlt();draw()}};
+function ok(s){
+ if(flt==='mine')return mine.includes(s.i);
+ if(s.d!==day)return false;
+ if(flt==='work')return s.ty==='workshop'||s.ty==='masterclass';
+ return flt==='all'||s.k===flt;
+}
+function draw(){
+ const L=S.filter(ok);
+ $('#list').innerHTML=L.length?L.map(s=>`<div class="card ${s.ty==='break'?'brk':''}"><div class="tm">${s.s}<small>${s.e||''}</small></div><div class="bd"><h4>${s.t}</h4>${s.h?`<p>${s.h}</p>`:''}${s.p?`<p>${names(s.p)}</p>`:''}${s.k?`<span class="tag">${s.k}</span>`:''}${s.n?`<p>${s.n}</p>`:''}</div>${s.ty==='break'?'':`<button class="star ${mine.includes(s.i)?'on':''}" data-s="${s.i}" aria-label="Save to my agenda"><svg class="i"><use href="#star"/></svg></button>`}</div>`).join(''):'<p style="color:var(--mute);font-size:.85rem">Nothing here yet. Tap the star on a session to save it.</p>';
+}
+$('#list').onclick=e=>{const b=e.target.closest('.star');if(!b)return;const i=b.dataset.s;mine=mine.includes(i)?mine.filter(x=>x!==i):[...mine,i];save();if(flt==='mine')draw();else b.classList.toggle('on')};
+$('#ics').onclick=()=>{
+ const z=n=>String(n).padStart(2,'0'),u=(d,t)=>{const[y,m,dd]=DATES[d].split('-').map(Number),[h,mi]=t.split(':').map(Number),x=new Date(Date.UTC(y,m-1,dd,h-2,mi));return x.getUTCFullYear()+z(x.getUTCMonth()+1)+z(x.getUTCDate())+'T'+z(x.getUTCHours())+z(x.getUTCMinutes())+'00Z'};
+ const ev=S.filter(s=>mine.includes(s.i)).map(s=>`BEGIN:VEVENT\nUID:${s.i}@awief2026\nDTSTAMP:${u(1,'00:00')}\nDTSTART:${u(s.d,s.s)}\nDTEND:${u(s.d,s.e||s.s)}\nSUMMARY:${s.t}\nLOCATION:CTICC ${s.k||''}\nEND:VEVENT`);
+ if(!ev.length)return alert('Star some sessions first.');
+ const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//AWIEF 2026//EN\n'+ev.join('\n')+'\nEND:VCALENDAR'],{type:'text/calendar'}));a.download='awief-2026-agenda.ics';a.click();
+};
 
-            <!-- Featured Highlights List -->
-            <div class="section-title">Day 1 Highlights</div>
-            
-            <div class="list-card">
-                <div class="list-info">
-                    <h4>Magda Wierzycka Keynote</h4>
-                    <p>Main Stage • Opening Address</p>
-                </div>
-                <span class="time-badge">09:00</span>
-            </div>
+/* now & next */
+function nowNext(){
+ const n=cat(),K=s=>DATES[s.d]+' '+s.s,E=s=>DATES[s.d]+' '+(s.e||s.s);
+ const live=S.filter(s=>s.ty!=='break'&&K(s)<=n&&n<E(s)),nxt=S.filter(s=>s.ty!=='break'&&K(s)>n).slice(0,2);
+ let h;
+ if(n<DATES[1]+' 00:00'){const dl=Math.ceil((new Date(DATES[1])-new Date(n.slice(0,10)))/864e5);h=`<small>Conference starts in</small><b>${dl} day${dl===1?'':'s'}</b><small>Tue 10 Nov, 09:00, Main Stage</small>`}
+ else if(!live.length&&!nxt.length)h='<b>Thank you for joining AWIEF 2026</b><small>See you next year</small>';
+ else h=live.slice(0,2).map(s=>`<small>On now, ${s.k}</small><b>${s.t}</b>`).join('')+nxt.map(s=>`<small style="display:block;margin-top:8px">Next, ${s.s} ${s.k||''}</small><b>${s.t}</b>`).join('');
+ $('#nn').innerHTML=h;
+}
 
-            <div class="list-card">
-                <div class="list-info">
-                    <h4>Peace Dividends Plenary</h4>
-                    <p>Open Society Foundations Partnership</p>
-                </div>
-                <span class="time-badge">10:00</span>
-            </div>
+/* speakers */
+function speakers(){
+ const m={};S.forEach(s=>(s.p||'').split(';').filter(Boolean).forEach(x=>{const[n,r]=x.split('|');(m[n]=m[n]||{r,s:[]}).s.push(s.t)}));
+ $('#spkl').innerHTML=Object.keys(m).sort().map(n=>`<div class="card"><div class="av">${n.replace(/^(Hon\.|Dr\.?|Amb\.|Ms\.)\s*/,'').split(' ').map(w=>w[0]).slice(0,2).join('')}</div><div class="bd"><h4>${n}</h4><p>${m[n].r||''}</p><span class="tag">${m[n].s[0]}</span></div></div>`).join('');
+}
 
-            <div class="list-card">
-                <div class="list-info">
-                    <h4>Blue Economy Panel</h4>
-                    <p>Owning Assets in Aquaculture & Tourism</p>
-                </div>
-                <span class="time-badge">15:00</span>
-            </div>
+/* carousel dots */
+const car=$('#car');$('#dots').innerHTML=[...car.children].map(()=>'<i></i>').join('');
+const dots=$$('#dots i');const dot=()=>{const i=Math.round(car.scrollLeft/car.clientWidth);dots.forEach((d,j)=>d.classList.toggle('on',i===j))};
+car.onscroll=dot;dot();
 
-        </div>
+/* announcements (edit announcements.json, no backend needed) */
+async function ann(){try{const a=await(await fetch('announcements.json',{cache:'no-store'})).json();$('#ann').innerHTML=a.length?'<h2>Updates</h2>'+a.slice(0,3).map(x=>`<div class="card"><div class="bd"><h4>${x.m}</h4><p>${x.t}</p></div></div>`).join(''):''}catch(e){}}
 
-        <!-- Fixed Bottom App Navigation -->
-        <nav class="bottom-nav">
-            <a href="#" class="nav-item active">
-                <span class="nav-icon">🏠</span>
-                Home
-            </a>
-            <a href="#schedule" class="nav-item">
-                <span class="nav-icon">📅</span>
-                Programme
-            </a>
-            <a href="#speakers" class="nav-item">
-                <span class="nav-icon">🎙️</span>
-                Speakers
-            </a>
-            <a href="#map" class="nav-item">
-                <span class="nav-icon">🗺️</span>
-                Venue
-            </a>
-            <a href="#info" class="nav-item">
-                <span class="nav-icon">ℹ️</span>
-                Info
-            </a>
-        </nav>
-    </div>
+/* weather (Open-Meteo, free) */
+fetch('https://api.open-meteo.com/v1/forecast?latitude=-33.92&longitude=18.42&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max&timezone=Africa%2FJohannesburg&start_date=2026-11-10&end_date=2026-11-11').then(r=>r.json()).then(j=>{
+ if(!j.daily)throw 0;$('#wxb').innerHTML=j.daily.time.map((d,i)=>`<h4>${d===DATES[1]?'Tue 10 Nov':'Wed 11 Nov'}: ${Math.round(j.daily.temperature_2m_min[i])}–${Math.round(j.daily.temperature_2m_max[i])}°C</h4><p>Chance of rain ${j.daily.precipitation_probability_max[i]}%</p>`).join('');
+}).catch(()=>{$('#wxb').innerHTML='<p>The forecast appears about 16 days before the conference.</p>'});
 
+/* notifications + install */
+const ua=navigator.userAgent,inApp=/Instagram|FBAN|FBAV|LinkedInApp|Line\//.test(ua),isIOS=/iPhone|iPad/.test(ua),standalone=matchMedia('(display-mode:standalone)').matches||navigator.standalone;
+if(inApp)$('#inapp').style.display='block';
+if(isIOS&&!standalone)$('#ios').style.display='block';
+window.OneSignalDeferred=window.OneSignalDeferred||[];
+if(CFG.onesignal){const s=document.createElement('script');s.src='https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js';s.defer=true;document.head.append(s);OneSignalDeferred.push(O=>O.init({appId:CFG.onesignal,serviceWorkerPath:'sw.js'}))}
+$('#pushb').onclick=()=>{
+ if(!CFG.onesignal)return alert('Notifications will be switched on before the conference.');
+ if(isIOS&&!standalone)return alert('Add this app to your Home Screen first, then try again.');
+ OneSignalDeferred.push(O=>O.Notifications.requestPermission());
+};
+
+/* photo wall (Supabase) */
+const sb=(p,o={})=>fetch(CFG.sbUrl+p,{...o,headers:{apikey:CFG.sbKey,Authorization:'Bearer '+CFG.sbKey,...(o.headers||{})}});
+$('#up').onclick=()=>{if(!$('#consent').checked)return $('#upm').textContent='Please tick the consent box first.';$('#file').click()};
+$('#file').onchange=async e=>{
+ const f=e.target.files[0];if(!f)return;
+ if(!CFG.sbUrl)return $('#upm').textContent='Photo sharing opens at the conference.';
+ $('#upm').textContent='Uploading…';
+ try{
+  const b=await createImageBitmap(f),k=Math.min(1,1600/Math.max(b.width,b.height)),c=document.createElement('canvas');c.width=b.width*k;c.height=b.height*k;c.getContext('2d').drawImage(b,0,0,c.width,c.height);
+  const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.8)),path=Date.now()+'-'+Math.random().toString(36).slice(2)+'.jpg';
+  const r1=await sb('/storage/v1/object/moments/'+path,{method:'POST',headers:{'Content-Type':'image/jpeg'},body:blob});if(!r1.ok)throw 0;
+  const r2=await sb('/rest/v1/moments',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({path,approved:false})});if(!r2.ok)throw 0;
+  $('#upm').textContent='Thank you! Your photo will appear once approved.';
+ }catch(x){$('#upm').textContent='Upload failed. Check your connection and try again.'}
+ e.target.value='';
+};
+async function wall(){
+ if(!CFG.sbUrl)return;
+ try{const r=await(await sb('/rest/v1/moments?approved=eq.true&order=created_at.desc&limit=30')).json();$('#wall').innerHTML=r.map(m=>`<img loading="lazy" alt="Conference moment" src="${CFG.sbUrl}/storage/v1/object/public/moments/${m.path}">`).join('')}catch(e){}
+}
+
+/* boot */
+fetch('schedule.json').then(r=>r.json()).then(j=>{S=j;nowNext();speakers();draw()});
+drawFlt();ann();setInterval(()=>{nowNext();ann()},6e4);
+if('serviceWorker'in navigator)navigator.serviceWorker.register('sw.js');
+</script>
 </body>
 </html>
