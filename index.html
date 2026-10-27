@@ -80,8 +80,8 @@ footer{text-align:center;font-size:.75rem;color:var(--mute);margin:26px 0 8px}
  <div class="car" id="car">
   <div class="slide"><img src="hero-riaan.webp" alt="Riaan Manser, Ignite Talk, Wed 11 Nov 13:25, Main Stage"></div>
   <div class="slide"><div class="sl m"><b>Beyond Access: Owning Capital, Markets &amp; Power</b><span>The 2026 theme. 10–11 Nov, Cape Town</span></div></div>
-  <div class="slide"><div class="sl"><b>AWIEF Pitch n Grow</b><span>10 finalists, 3 tracks. Wed 11 Nov, 11:10, Main Stage</span></div></div>
-  <div class="slide"><div class="sl"><b>AWIEF–Nedbank Women Enterprise Growth &amp; Export</b><span>Programme launch. Tue 10 Nov, 15:00, Main Stage</span></div></div>
+  <div class="slide"><div class="sl"><b>AWIEF Pitch n Grow</b><span>9 finalists, 3 tracks. Wed 11 Nov, 11:10, Main Stage</span></div></div>
+  <div class="slide"><div class="sl"><b>AWIEF–Nedbank Women Enterprise Growth &amp; Export</b><span>Programme launch. Tue 10 Nov, 14:35, Main Stage</span></div></div>
   <div class="slide"><div class="sl m"><b>Awards Ceremony &amp; Gala Dinner</b><span>Wed 11 Nov, 19:30</span></div></div>
  </div>
  <div class="dots" id="dots"></div>
@@ -126,7 +126,7 @@ footer{text-align:center;font-size:.75rem;color:var(--mute);margin:26px 0 8px}
  <div class="note" id="ios">On iPhone: tap Share, then Add to Home Screen. Open the app from your home screen, then turn on notifications here.</div>
  <button class="btn" id="pushb">Turn on notifications</button>
  <h2 id="venue">Venue</h2>
- <div class="card"><div class="bd"><h4>Cape Town International Convention Centre (CTICC)</h4><p>Registration and exhibition: Foyer. Main Stage: plenary sessions. Expo Floor: workshops, masterclasses and B2B meetings.</p></div></div>
+ <div class="card"><div class="bd"><h4>Cape Town International Convention Centre (CTICC)</h4><p>Registration and exhibition: Foyer. Main Stage: plenary sessions. Expo Floor: exhibition, B2B meetings, and workshops and masterclasses in Knowledge Hubs 1 and 2.</p></div></div>
  <img id="map" src="map.jpg" alt="CTICC floor plan" style="width:100%;border-radius:14px;display:none" onload="this.style.display='block'">
  <h2 id="wx">Weather forecast</h2>
  <div class="card"><div class="bd" id="wxb"><p>Loading…</p></div></div>
@@ -179,12 +179,12 @@ function ok(s){
 }
 function draw(){
  const L=S.filter(ok);
- $('#list').innerHTML=L.length?L.map(s=>`<div class="card ${s.ty==='break'?'brk':''}"><div class="tm">${s.s}<small>${s.e||''}</small></div><div class="bd"><h4>${s.t}</h4>${s.h?`<p>${s.h}</p>`:''}${s.p?`<p>${names(s.p)}</p>`:''}${s.k?`<span class="tag">${s.k}</span>`:''}${s.n?`<p>${s.n}</p>`:''}</div>${s.ty==='break'?'':`<button class="star ${mine.includes(s.i)?'on':''}" data-s="${s.i}" aria-label="Save to my agenda"><svg class="i"><use href="#star"/></svg></button>`}</div>`).join(''):'<p style="color:var(--mute);font-size:.85rem">Nothing here yet. Tap the star on a session to save it.</p>';
+ $('#list').innerHTML=L.length?L.map(s=>`<div class="card ${s.ty==='break'?'brk':''}"><div class="tm">${s.s}<small>${s.e||''}</small></div><div class="bd"><h4>${s.t}</h4>${s.h?`<p>${s.h}</p>`:''}${s.p?`<p>${names(s.p)}</p>`:''}${s.k?`<span class="tag">${s.k}${s.r?`, ${s.r}`:''}</span>`:''}${s.n?`<p>${s.n}</p>`:''}</div>${s.ty==='break'?'':`<button class="star ${mine.includes(s.i)?'on':''}" data-s="${s.i}" aria-label="Save to my agenda"><svg class="i"><use href="#star"/></svg></button>`}</div>`).join(''):'<p style="color:var(--mute);font-size:.85rem">Nothing here yet. Tap the star on a session to save it.</p>';
 }
 $('#list').onclick=e=>{const b=e.target.closest('.star');if(!b)return;const i=b.dataset.s;mine=mine.includes(i)?mine.filter(x=>x!==i):[...mine,i];save();if(flt==='mine')draw();else b.classList.toggle('on')};
 $('#ics').onclick=()=>{
  const z=n=>String(n).padStart(2,'0'),u=(d,t)=>{const[y,m,dd]=DATES[d].split('-').map(Number),[h,mi]=t.split(':').map(Number),x=new Date(Date.UTC(y,m-1,dd,h-2,mi));return x.getUTCFullYear()+z(x.getUTCMonth()+1)+z(x.getUTCDate())+'T'+z(x.getUTCHours())+z(x.getUTCMinutes())+'00Z'};
- const ev=S.filter(s=>mine.includes(s.i)).map(s=>`BEGIN:VEVENT\nUID:${s.i}@awief2026\nDTSTAMP:${u(1,'00:00')}\nDTSTART:${u(s.d,s.s)}\nDTEND:${u(s.d,s.e||s.s)}\nSUMMARY:${s.t}\nLOCATION:CTICC ${s.k||''}\nEND:VEVENT`);
+ const ev=S.filter(s=>mine.includes(s.i)).map(s=>`BEGIN:VEVENT\nUID:${s.i}@awief2026\nDTSTAMP:${u(1,'00:00')}\nDTSTART:${u(s.d,s.s)}\nDTEND:${u(s.d,s.e||s.s)}\nSUMMARY:${s.t}\nLOCATION:CTICC ${s.k||''}${s.r?', '+s.r:''}\nEND:VEVENT`);
  if(!ev.length)return alert('Star some sessions first.');
  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//AWIEF 2026//EN\n'+ev.join('\n')+'\nEND:VCALENDAR'],{type:'text/calendar'}));a.download='awief-2026-agenda.ics';a.click();
 };
@@ -194,7 +194,7 @@ function nowNext(){
  const n=cat(),K=s=>DATES[s.d]+' '+s.s,E=s=>DATES[s.d]+' '+(s.e||s.s);
  const live=S.filter(s=>s.ty!=='break'&&K(s)<=n&&n<E(s)),nxt=S.filter(s=>s.ty!=='break'&&K(s)>n).slice(0,2);
  let h;
- if(n<DATES[1]+' 00:00'){const dl=Math.ceil((new Date(DATES[1])-new Date(n.slice(0,10)))/864e5);h=`<small>Conference starts in</small><b>${dl} day${dl===1?'':'s'}</b><small>Tue 10 Nov, 09:00, Main Stage</small>`}
+ if(n<DATES[1]+' 00:00'){const dl=Math.ceil((new Date(DATES[1])-new Date(n.slice(0,10)))/864e5);h=`<small>Conference starts in</small><b>${dl} day${dl===1?'':'s'}</b><small>Tue 10 Nov, 08:45, Main Stage</small>`}
  else if(!live.length&&!nxt.length)h='<b>Thank you for joining AWIEF 2026</b><small>See you next year</small>';
  else h=live.slice(0,2).map(s=>`<small>On now, ${s.k}</small><b>${s.t}</b>`).join('')+nxt.map(s=>`<small style="display:block;margin-top:8px">Next, ${s.s} ${s.k||''}</small><b>${s.t}</b>`).join('');
  $('#nn').innerHTML=h;
